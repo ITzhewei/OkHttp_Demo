@@ -16,13 +16,10 @@ public class NetPresenter implements IPresenter {
     }
 
 
-
-
     @Override
     public void doGet() {
         Model model = new Model();
-        model.getNet();
-        model.setOnListener(new Model.Listener() {
+        model.getNet(new Model.Listener() {
             @Override
             public void onSuccess(byte[] bytes) {
                 mView.showTU(bytes);
@@ -33,5 +30,50 @@ public class NetPresenter implements IPresenter {
                 mView.showFailed();
             }
         });
+        //        model.setOnListener(new Model.Listener() {
+        //            @Override
+        //            public void onSuccess(byte[] bytes) {
+        //                mView.showTU(bytes);
+        //            }
+        //
+        //            @Override
+        //            public void onFailed() {
+        //                mView.showFailed();
+        //            }
+        //        });
     }
+
+
+    @Override
+    public void doGetJsonString() {
+        Model model = new Model();
+        model.getJson(new Model.JsonListener() {
+            @Override
+            public void onSuccess(String string) {
+                mView.showJson(string);
+            }
+
+            @Override
+            public void onFailed() {
+
+            }
+        });
+    }
+
+    @Override
+    public void Register(String email, String pass) {
+        Model model = new Model();
+        model.postJson(email, pass, new Model.JsonListener() {
+            @Override
+            public void onSuccess(String string) {
+                mView.showPost(string);
+            }
+
+            @Override
+            public void onFailed() {
+
+            }
+        });
+    }
+
 }

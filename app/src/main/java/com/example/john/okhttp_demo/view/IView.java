@@ -8,4 +8,8 @@ public interface IView {
     void showTU(byte[] bytes);
 
     void showFailed();
+
+    void showJson(String string);
+
+    void showPost(String string);
 }
